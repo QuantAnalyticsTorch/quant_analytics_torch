@@ -5,3 +5,7 @@ Quantitative analytics with Pytorch and Deep learning
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/QuantAnalyticsTorch/quant_analytics_torch.git/main)
 
 Further documentation https://quantanalyticstorch.github.io/
+
+```bash
+pip install quant-analytics-torch
+```
