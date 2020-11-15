@@ -1,5 +1,6 @@
 README.md
 setup.py
+quant_analytics_torch/__init__.py
 quant_analytics_torch.egg-info/PKG-INFO
 quant_analytics_torch.egg-info/SOURCES.txt
 quant_analytics_torch.egg-info/dependency_links.txt

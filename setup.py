@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='quant_analytics_torch',
-    version='0.0.1',
+    version='0.0.2',
     packages=find_packages(),
     description = 'Quantitative analytics package based on PyTorch for deep learning of derivative pricing',
     author_email = 'quant.analytics.torch@gmail.com',

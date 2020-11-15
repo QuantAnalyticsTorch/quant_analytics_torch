@@ -1,1 +1,1 @@
-
+quant_analytics_torch
