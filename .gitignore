@@ -56,3 +56,6 @@ test-reports
 
 # Ignore build
 build
+
+# Ignore documentation in this repo
+html
