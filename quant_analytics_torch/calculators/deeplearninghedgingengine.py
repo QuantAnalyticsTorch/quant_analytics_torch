@@ -1,7 +1,7 @@
 import torch
 
 from quant_analytics_torch.modules.longshorttermmemory import LongShortTermModule
-from quant_analytics_torch.calculators.pathgenerator import PathGenerator
+from quant_analytics_torch.calculators.pathgeneratornormal import PathGeneratorNormal
 
 class DeepLearningValuationEngine(torch.nn.Module):
     def __init__(self, input_size=1, batch_size=1000, hidden_layer_size=128, output_size=1, epochs=20, training_size=50, seq_len = 2):
@@ -15,11 +15,13 @@ class DeepLearningValuationEngine(torch.nn.Module):
 
         self.model = LongShortTermModule(batch_size=self.batch_size, hidden_layer_size=self.hidden_layer_size)
         self.optimizer = torch.optim.Adam(self.model.parameters(), lr=0.0001)
-        self.pathgenerator = PathGenerator(self.seq_len)
 
         self.input_dim = 1
         self.risk_aversion = 20
         self.sigma = 0.2
+
+        self.pathgenerator = PathGeneratorNormal(seq_len=self.seq_len, forwardvariance=torch.tensor(0.04), fwd=0.0)
+
 
     def init_hidden(self, batch_size):
         self.model.hidden_cell = (  torch.zeros(1, batch_size, self.model.hidden_layer_size),

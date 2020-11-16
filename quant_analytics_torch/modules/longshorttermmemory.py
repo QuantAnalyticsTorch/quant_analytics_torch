@@ -1,8 +1,8 @@
 import torch
 
-from quant_analytics_torch.modules.basemodule import BaseModule
+from quant_analytics_torch.modules.baseneuralnetworkmodule import BaseNeuralNetworkModule
 
-class LongShortTermModule(BaseModule):
+class LongShortTermModule(BaseNeuralNetworkModule):
     def __init__(self, input_size=1, batch_size=10, hidden_layer_size=128, output_size=1):
         super().__init__()
         self.hidden_layer_size = hidden_layer_size

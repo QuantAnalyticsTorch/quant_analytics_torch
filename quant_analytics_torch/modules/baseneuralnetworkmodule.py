@@ -1,6 +1,6 @@
 import torch
 
-class BaseModule(torch.nn.Module):
+class BaseNeuralNetworkModule(torch.nn.Module):
     def __init__(self):
         super().__init__()
 
