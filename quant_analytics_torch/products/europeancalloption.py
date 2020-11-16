@@ -11,5 +11,5 @@ class EuropeanCallOption(BaseProduct):
     def states(self):
         return []
 
-    def payoff(self, stateVector):
-        return [torch.max(stateVector[:,-1,:],torch.tensor(0.))]
+    def payoff(self, stateVector, decisionVector):
+        return torch.max(stateVector[:,-1,:],torch.tensor(0.))

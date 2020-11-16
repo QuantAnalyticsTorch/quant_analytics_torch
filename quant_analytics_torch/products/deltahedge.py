@@ -3,10 +3,9 @@ import torch
 from quant_analytics_torch.products.baseproduct import BaseProduct
 
 class DeltaHedge(BaseProduct):
-    def __init__(self, seq_len=2, maturity=1, strike=0):
+    def __init__(self, seq_len=2, maturity=1):
         super().__init__()
         self.maturity = maturity
-        self.strike = strike
         self.seq_len = seq_len
 
     def states(self):
