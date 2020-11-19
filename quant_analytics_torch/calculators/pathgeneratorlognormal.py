@@ -22,6 +22,6 @@ class PathGeneratorLognormal(PathGenerator):
 
         for k in range(self.seq_len):
             z0[:,k+1,:] = z0[:,k,:] + self.sigma * dx[:,k,:] - self.forwardvariance/2
-            x0[:,k+1,:] = self.fwd * torch.exp(z0[:,k,:])
+            x0[:,k+1,:] = self.fwd * torch.exp(z0[:,k+1,:])
 
         return x0
