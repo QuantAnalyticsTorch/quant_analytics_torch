@@ -13,7 +13,15 @@ class DeepLearningConditionalExpectation(torch.nn.Module):
         self.training_size = training_size
         self.seq_len = seq_len
 
-        self.model = LongShortTermModule(batch_size=self.batch_size, hidden_layer_size=self.hidden_layer_size)
+        self.model = torch.nn.Sequential(torch.nn.Linear(input_size, output_size))
+        #,
+        #                               torch.nn.ReLU(inplace=True),
+        #                               torch.nn.Linear(n_hidden, n_hidden),
+        #                               torch.nn.ReLU(inplace=True),
+        #                               torch.nn.Linear(n_hidden, n_out))
+
+
+        #self.model = LongShortTermModule(batch_size=self.batch_size, hidden_layer_size=self.hidden_layer_size)
         self.optimizer = torch.optim.Adam(self.model.parameters(), lr=0.0005)
 
         self.input_dim = 1
@@ -23,9 +31,6 @@ class DeepLearningConditionalExpectation(torch.nn.Module):
         self.pathgenerator = PathGeneratorLognormal(seq_len=self.seq_len, forwardvariance=torch.tensor(0.04/(self.seq_len+1)), fwd=1.0)
 
 
-    def init_hidden(self, batch_size):
-        self.model.hidden_cell = (  torch.zeros(1, batch_size, self.model.hidden_layer_size),
-                                    torch.zeros(1, batch_size,  self.model.hidden_layer_size))
 
     def paths(self, batch_size):
         return self.pathgenerator.paths(batch_size)
@@ -34,7 +39,7 @@ class DeepLearningConditionalExpectation(torch.nn.Module):
         return torch.max(x0[:,-1,:]-torch.tensor(1.),torch.tensor(0.))
 
     def output(self, x0):
-        return self.model(x0[:,:-1,:])
+        return self.model(x0[:,1,:])
 
     def pnl(self, x0, delta, payoff, batch_size):
         pnl = torch.zeros(batch_size, self.input_dim)
@@ -62,9 +67,6 @@ class DeepLearningConditionalExpectation(torch.nn.Module):
 
                 self.optimizer.zero_grad()
 
-                # Reinitialise the hidden cells
-                self.init_hidden(self.batch_size)
-
                 # Take a subset of the paths
                 x0 = x0_t[j*self.batch_size:(j+1)*self.batch_size,:,:]
 
@@ -76,8 +78,7 @@ class DeepLearningConditionalExpectation(torch.nn.Module):
 
                 loss = torch.tensor(0., requires_grad=True)
 
-                for i in range(self.seq_len):
-                    loss = loss + torch.norm(output[:,i,:]-payoff[:,:])
+                loss = loss + torch.norm(output[:,:]-payoff[:,:])
 
                 # Propagate derivates
                 loss.backward()
@@ -85,7 +86,7 @@ class DeepLearningConditionalExpectation(torch.nn.Module):
                 self.optimizer.step()
 
             # Print some deltas
-            print(output[0:5,:,0])
+            print(output[0:5,0])
 
             print(f'Epoch number: {i:3} mean variance loss: {loss.item():10.6f}')
 

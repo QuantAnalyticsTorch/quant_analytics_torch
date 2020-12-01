@@ -1,3 +1,5 @@
+import tensorflow as tf
+
 EPSILON = 0.0001
 
 def test_zero():
