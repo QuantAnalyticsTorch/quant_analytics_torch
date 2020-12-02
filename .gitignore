@@ -59,3 +59,5 @@ build
 
 # Ignore documentation in this repo
 html
+
+examples/logs
