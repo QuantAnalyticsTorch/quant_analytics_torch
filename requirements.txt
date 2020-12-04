@@ -80,8 +80,8 @@ tensorboardX==2.1
 tensorflow==2.3.1
 tensorflow-estimator==2.3.0
 termcolor==1.1.0
-tf-estimator-nightly==2.5.0
-tf-nightly-cpu==2.5.0
+tf-estimator-nightly
+tf-nightly-cpu
 threadpoolctl==2.1.0
 tokenizers==0.9.4
 toml==0.10.2
