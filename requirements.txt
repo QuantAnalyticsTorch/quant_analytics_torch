@@ -23,8 +23,8 @@ idna==2.10
 importlib-metadata==2.0.0
 iniconfig==1.1.1
 ipykernel==5.3.4
-ipython==7.19.0
-ipython-genutils==0.2.0
+ipython==7.19.0  ; sys_platform == 'win32'
+ipython-genutils==0.2.0  ; sys_platform == 'win32'
 jedi==0.17.2
 joblib==0.17.0
 jupyter-client==6.1.7
