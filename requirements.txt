@@ -84,7 +84,7 @@ torch==1.4.0
 torchvision==0.5.0
 tornado==6.1
 tqdm==4.51.0
-traitlets==5.0.5
+traitlets==5.0.5 ; sys_platform == 'win32'
 twine==3.2.0
 typing-extensions==3.7.4.3
 urllib3==1.26.2
