@@ -9,3 +9,9 @@ Further documentation https://quantanalyticstorch.github.io/
 ```bash
 pip install quant-analytics-torch
 ```
+
+mkdir docs
+cd docs
+sphinx-quickstart
+sphinx-apidoc -o source/ ../quant_analytics_torch
+make html

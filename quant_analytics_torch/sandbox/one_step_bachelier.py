@@ -1,3 +1,9 @@
+""" 
+test.py
+=============
+ABC
+"""
+
 import torch
 import matplotlib
 import matplotlib.pyplot as plt
@@ -6,6 +12,14 @@ from sklearn.model_selection import train_test_split
 from quant_analytics_torch.modules.longshorttermmemory import LongShortTermModule
 
 def entropy_loss(x,d=20):
+    """[Summary]
+
+    :param [x]: [ParamDescription], defaults to [DefaultParamVal]
+    :type [ParamName]: [ParamType](, optional)
+    :return: [ReturnDescription]
+    :rtype: [ReturnType]
+    """
+
     return 1./d*torch.log(torch.mean(torch.exp(-d*x)))
 
 if __name__ == '__main__':
