@@ -16,7 +16,10 @@ Quant Analytics Torch
    modules
 
 
-This is the introduction to Quant Analytics Torch. User are recommended to read the :hoverxref:`getting started <getting_started>`. Further ideas here
+This is the introduction to Quant Analytics Torch. User are recommended to read the :hoverxref:`getting started <getting_started>`.
+
+.. image:: https://mybinder.org/badge_logo.svg
+    :target: https://mybinder.org/v2/gh/QuantAnalyticsTorch/quant_analytics_torch.git/HEAD
 
 .. grid:: 2
     :margin: 5 5 0 0
