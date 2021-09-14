@@ -52,8 +52,6 @@ oauthlib==3.1.0
 opt-einsum==3.3.0
 packaging==20.4
 parso==0.7.1
-pdoc==0.3.2
-pdoc3==0.9.1
 pickleshare==0.7.5
 Pillow==8.0.1
 pkginfo==1.6.1
