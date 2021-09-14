@@ -27,7 +27,7 @@ author = 'Quant Analytics'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.autosummary'
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.autosummary', 'sphinx.ext.viewcode', 'sphinx.ext.napoleon','hoverxref.extension',"sphinx_design"
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -44,7 +44,8 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
+#html_theme = 'sphinx_rtd_theme'
+html_theme = 'furo'
 
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -61,3 +62,15 @@ autodoc_default_options = {
 }
 
 add_module_names = False
+
+
+comments_config = {
+   "utterances": {
+      "repo": "QuantAnalyticsTorch/quant_analytics_torch",
+      "optional": "config",
+   }
+}
+
+hoverxref_project = 'quant-analytics-torch'
+hoverxref_version = 'latest'
+hoverxref_api_host = 'https://readthedocs.org'
