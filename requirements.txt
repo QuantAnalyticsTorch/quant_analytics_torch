@@ -47,7 +47,7 @@ MarkupSafe==1.1.1
 matplotlib==3.3.3
 mkdocs==1.1.2
 nltk==3.5
-numpy==1.19.4
+numpy
 oauthlib==3.1.0
 opt-einsum==3.3.0
 packaging==20.4
@@ -91,11 +91,6 @@ sphinxcontrib-htmlhelp==1.0.3
 sphinxcontrib-jsmath==1.0.1
 sphinxcontrib-qthelp==1.0.3
 sphinxcontrib-serializinghtml==1.1.4
-tensorboard-plugin-profile==2.3.0
-tensorboard-plugin-wit==1.7.0
-tensorboardX==2.1
-tensorflow==2.3.1
-tensorflow-estimator==2.3.0
 termcolor==1.1.0
 threadpoolctl==2.1.0
 tokenizers==0.9.4
