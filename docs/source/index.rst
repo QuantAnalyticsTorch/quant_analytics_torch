@@ -18,8 +18,11 @@ Quant Analytics Torch
 
 This is the introduction to Quant Analytics Torch. User are recommended to read the :hoverxref:`getting started <getting_started>`.
 
+.. image:: https://colab.research.google.com/assets/colab-badge.svg
+    :target: https://colab.research.google.com/github/QuantAnalyticsTorch/quant_analytics_torch/blob/main/docs/source/examples/SSVICalibration.ipynb
+
 .. image:: https://mybinder.org/badge_logo.svg
-    :target: https://mybinder.org/v2/gh/QuantAnalyticsTorch/quant_analytics_torch.git/HEAD
+    :target: https://mybinder.org/v2/gh/QuantAnalyticsTorch/quant_analytics_torch.git/main?urlpath=lab%2Ftree%2Fdocs%2Fsource%2Fexamples
 
 .. grid:: 2
     :margin: 5 5 0 0
