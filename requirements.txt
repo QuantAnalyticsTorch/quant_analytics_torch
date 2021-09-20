@@ -47,11 +47,13 @@ Markdown
 MarkupSafe==1.1.1
 matplotlib==3.3.3
 mkdocs==1.1.2
+mpmath
 nltk==3.5
 numpy
 oauthlib==3.1.0
 opt-einsum==3.3.0
 packaging==20.4
+pandas
 parso==0.7.1
 pickleshare==0.7.5
 Pillow==8.0.1
