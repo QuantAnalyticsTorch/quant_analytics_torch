@@ -1,4 +1,4 @@
-.. _index_label:
+.. _example_notebooks:
 
 .. Quant Analytics Flow documentation master file, created by
    sphinx-quickstart on Mon Dec  7 20:22:22 2020.

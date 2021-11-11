@@ -10,4 +10,6 @@ Install
 
 Installation can be done via pip::
 
-    pip install quant-analytics-flow
+    pip install quant-analytics-torch
+
+Next it is recommended to read the :hoverxref:`user_guide <user_guide>`

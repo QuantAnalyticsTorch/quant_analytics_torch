@@ -1,4 +1,4 @@
-.. _index_label:
+.. _user_guide:
 
 .. Quant Analytics Flow documentation master file, created by
    sphinx-quickstart on Mon Dec  7 20:22:22 2020.
@@ -26,4 +26,4 @@ This provides some further guidance to the user
         :link: example_notebooks
         :link-type: doc
 
-        Some Jupyter notebook examples
+        Jupyter example notebooks
