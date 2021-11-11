@@ -12,4 +12,4 @@ Installation can be done via pip::
 
     pip install quant-analytics-torch
 
-Next it is recommended to read the :hoverxref:`user_guide <user_guide>`
+Next it is recommended to read the :hoverxref:`user guide <user_guide>`
