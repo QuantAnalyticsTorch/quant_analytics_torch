@@ -8,7 +8,9 @@ User guide
    :caption: Contents:
    :hidden:
 
-   example_notebooks
+   analytics
+   examples
+
 
 
 This provides some further guidance to the user
@@ -17,8 +19,14 @@ This provides some further guidance to the user
     :margin: 5 5 0 0
     :gutter: 4
 
-    .. grid-item-card:: :octicon:`rocket;1.5em` Example notebooks
-        :link: example_notebooks
+    .. grid-item-card:: :octicon:`rocket;1.5em` Examples
+        :link: examples
         :link-type: doc
 
-        Jupyter example notebooks
+        General examples
+
+    .. grid-item-card:: :octicon:`rocket;1.5em` Analytics
+        :link: analytics
+        :link-type: doc
+
+        Analytics examples
