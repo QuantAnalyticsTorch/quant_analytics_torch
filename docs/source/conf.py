@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath('..'))
 # -- Project information -----------------------------------------------------
 
 project = 'Quant Analytics'
-copyright = '2020, Quant Analytics'
+copyright = '2021, Quant Analytics'
 author = 'Quant Analytics'
 
 

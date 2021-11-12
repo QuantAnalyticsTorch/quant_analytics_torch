@@ -20,6 +20,14 @@ quant\_analytics\_torch.calculators.deeplearninghedgingengine module
    :undoc-members:
    :show-inheritance:
 
+quant\_analytics\_torch.calculators.multivariatebrownianbridge module
+---------------------------------------------------------------------
+
+.. automodule:: quant_analytics_torch.calculators.multivariatebrownianbridge
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 quant\_analytics\_torch.calculators.pathgenerator module
 --------------------------------------------------------
 
@@ -40,6 +48,14 @@ quant\_analytics\_torch.calculators.pathgeneratornormal module
 --------------------------------------------------------------
 
 .. automodule:: quant_analytics_torch.calculators.pathgeneratornormal
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+quant\_analytics\_torch.calculators.univariatebrownianbridge module
+-------------------------------------------------------------------
+
+.. automodule:: quant_analytics_torch.calculators.univariatebrownianbridge
    :members:
    :undoc-members:
    :show-inheritance:
