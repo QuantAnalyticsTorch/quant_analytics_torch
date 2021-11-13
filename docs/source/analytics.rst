@@ -14,6 +14,7 @@ Analytics
    :hidden:
 
    ./analytics/EuropeanOptionPricing
+   ./analytics/Maxsoft
 
 Example of analytics
 
@@ -26,3 +27,9 @@ Example of analytics
         :link-type: doc
 
         Example of pricing a European option
+
+    .. grid-item-card:: :octicon:`rocket;1.5em` Maxsoft
+        :link: ./analytics/Maxsoft
+        :link-type: doc
+
+        Maxsoft and heavyside function approximation
