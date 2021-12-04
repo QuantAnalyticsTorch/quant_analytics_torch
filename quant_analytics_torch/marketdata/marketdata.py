@@ -17,17 +17,19 @@ class MarketParameter(torch.nn.Parameter):
         return self.value
 
 class MarketData(object):
-    def __init__(self, inst : instruments.InstrumentBase, value : float):
+    def __init__(self, inst : instruments.InstrumentBase, value : float, details = dict() ):
         super(MarketData, self).__init__()
         self.inst = inst
         self.md = MarketParameter(torch.nn.Parameter(torch.tensor(value)), True, { 'type' : inst.type(), 'id' : inst.id() })
+        self.details = details
 
 
 if __name__ == '__main__':
     inst = instruments.EquitySpot("SPX")
-    md = MarketData(inst, 100.)
-    print(inst.type())
-    print(inst.id())    
+    md = MarketData(inst, 100., { 'ccy' : "EUR" })
+    print(md.inst.type())
+    print(md.inst.id())
+    print(md.details)    
     param = md.md
     print(param.getName())
     print(param.getValue())    
