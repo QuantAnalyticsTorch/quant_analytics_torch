@@ -1,3 +1,4 @@
+# Copyright (c) Quant Analytics. All rights reserved.
 import torch
 from quant_analytics_torch.instruments import instruments
 
@@ -25,7 +26,7 @@ class MarketData(object):
 
 
 if __name__ == '__main__':
-    inst = instruments.EquitySpot("SPX")
+    inst = instruments.Asset("SPX")
     md = MarketData(inst, 100., { 'ccy' : "EUR" })
     print(md.inst.type())
     print(md.inst.id())
