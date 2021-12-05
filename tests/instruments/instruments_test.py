@@ -1,8 +1,9 @@
+# Copyright (c) Quant Analytics. All rights reserved.
 from quant_analytics_torch.instruments import instruments
 
 def test_instruments():
     
-    es = instruments.EquitySpot("SPX")
+    es = instruments.Asset("SPX")
     assert es.type() == "EquitySpot"
 
 if __name__ == '__main__':
