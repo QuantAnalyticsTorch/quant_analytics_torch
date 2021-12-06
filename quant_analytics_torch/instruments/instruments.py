@@ -20,14 +20,15 @@ class Asset(InstrumentBase):
         return { self.type() : self.name }
 
 class Forward(InstrumentBase):
-    def __init__(self, name : str, inst : InstrumentBase, maturity : datetime.datetime):
+    def __init__(self, name : str, inst : InstrumentBase, maturity = datetime.datetime.now(), strike = float('NaN') ):
         super().__init__()        
         self.name = name
         self.inst = inst
         self.maturity = maturity
+        self.strike = strike
 
     def id(self):
-        return { self.type() : { self.inst.name : self.maturity } }
+        return { self.type() : { self.inst.name : { self.maturity : self.strike } } }
 
 class EuropeanOption(InstrumentBase):
     def __init__(self, name : str, inst : InstrumentBase, maturity : str, strike : float):
@@ -42,7 +43,7 @@ class EuropeanOption(InstrumentBase):
 
 if __name__ == '__main__':
     inst = Asset("SPX")
-    fwd = Forward("SPX-2011", inst, datetime.datetime(2021,12,12))
+    fwd = Forward("SPX-2011", inst, datetime.datetime(2021,12,12),None)
     option = EuropeanOption("SPX-X-Y", inst, '2021-11-11', 100)
     print(inst.type())
     print(inst.id())    

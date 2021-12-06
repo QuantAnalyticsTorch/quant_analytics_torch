@@ -4,7 +4,7 @@ from quant_analytics_torch.instruments import instruments
 def test_instruments():
     
     es = instruments.Asset("SPX")
-    assert es.type() == "EquitySpot"
+    assert es.type() == "Asset"
 
 if __name__ == '__main__':
     test_instruments()
