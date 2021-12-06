@@ -51,9 +51,10 @@ def fillSampleDate(marketData : MarketDataRepository):
     fwd_3 = instruments.Forward("SPX-3", inst_1, datetime.datetime(2023,12,12) )
 
     fwd = [fwd_1, fwd_2, fwd_3]
+    fva = [101., 102., 103.]    
 
-    for f in fwd:
-        md = marketdata.MarketData(f,100.)
+    for i,f in enumerate(fwd):
+        md = marketdata.MarketData(f,fva[i])
         marketData.storeMarketData(md)
 
 
