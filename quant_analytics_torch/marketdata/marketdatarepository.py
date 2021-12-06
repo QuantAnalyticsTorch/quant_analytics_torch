@@ -1,6 +1,7 @@
 # Copyright (c) Quant Analytics. All rights reserved.
 from quant_analytics_torch.marketdata import marketdata
 from quant_analytics_torch.instruments import instruments
+from quant_analytics_torch.instruments import currencies
 
 import datetime
 
@@ -37,8 +38,8 @@ class MarketDataRepository(object):
 marketDataRepositorySingleton = MarketDataRepository()
 
 def fillSampleDate(marketData : MarketDataRepository):
-    inst_1 = instruments.Asset("SPX")
-    inst_2 = instruments.Asset("AAPL")
+    inst_1 = instruments.Asset("SPX", currencies.USD)
+    inst_2 = instruments.Asset("AAPL", currencies.USD)
 
     md_1 = marketdata.MarketData(inst_1, 100.)
     marketData.storeMarketData(md_1)
@@ -60,8 +61,8 @@ def fillSampleDate(marketData : MarketDataRepository):
 
 if __name__ == '__main__':
     fillSampleDate(marketDataRepositorySingleton)
-    inst_1 = instruments.Asset("SPX")
-    inst_2 = instruments.Asset("AAPL")
+    inst_1 = instruments.Asset("SPX", currencies.USD)
+    inst_2 = instruments.Asset("AAPL", currencies.USD)
 
     md = marketDataRepositorySingleton[inst_1.id()]
     param = md.md
@@ -72,8 +73,6 @@ if __name__ == '__main__':
     print(md)
 
     fwd_1 = instruments.Forward("SPX-1", inst_1, datetime.datetime(2021,12,12) )
-    fwd_2 = instruments.Forward("SPX-2", inst_1, datetime.datetime(2022,12,12) )
-    fwd_3 = instruments.Forward("SPX-3", inst_1, datetime.datetime(2023,12,12) )
 
     md = marketDataRepositorySingleton[{ fwd_1.type() : inst_1.name }]
 

@@ -1,6 +1,7 @@
 # Copyright (c) Quant Analytics. All rights reserved.
 import torch
 from quant_analytics_torch.instruments import instruments
+from quant_analytics_torch.instruments import currencies
 
 class MarketParameter(torch.nn.Parameter):
     def __new__(cls, value, require_grad, parameter_name):
@@ -26,7 +27,7 @@ class MarketData(object):
 
 
 if __name__ == '__main__':
-    inst = instruments.Asset("SPX")
+    inst = instruments.Asset("SPX", currencies.USD)
     md = MarketData(inst, 100., { 'ccy' : "EUR" })
     #print(md.inst.type())
     #print(md.inst.id())

@@ -1,5 +1,8 @@
 # Copyright (c) Quant Analytics. All rights reserved.
+from quant_analytics_torch.instruments import currencies
+
 import datetime
+
 
 class InstrumentBase(object):
     def __init__(self):
@@ -12,15 +15,16 @@ class InstrumentBase(object):
         return None
 
 class Asset(InstrumentBase):
-    def __init__(self, name : str):
+    def __init__(self, name : str, ccy : currencies):
         super().__init__()        
         self.name = name
+        self.ccy = ccy
 
     def id(self):
-        return { self.type() : self.name }
+        return { self.type() : { self.name : self.ccy.toString() } }
 
 class Forward(InstrumentBase):
-    def __init__(self, name : str, inst : InstrumentBase, maturity = datetime.datetime.now(), strike = float('NaN') ):
+    def __init__(self, name : str, inst : InstrumentBase, maturity = datetime.datetime.now(), strike = float('NaN'), ccy = currencies.Currency() ):
         super().__init__()        
         self.name = name
         self.inst = inst
@@ -31,7 +35,7 @@ class Forward(InstrumentBase):
         return { self.type() : { self.inst.name : { self.maturity : self.strike } } }
 
 class EuropeanOption(InstrumentBase):
-    def __init__(self, name : str, inst : InstrumentBase, maturity : str, strike : float):
+    def __init__(self, name : str, inst : InstrumentBase, maturity : str, strike : float, ccy = currencies.Currency()):
         super().__init__()        
         self.name = name
         self.inst = inst
@@ -42,7 +46,7 @@ class EuropeanOption(InstrumentBase):
         return { self.type() : { self.inst.name : { self.maturity : self.strike } } }
 
 if __name__ == '__main__':
-    inst = Asset("SPX")
+    inst = Asset("SPX", currencies.USD)
     fwd = Forward("SPX-2011", inst, datetime.datetime(2021,12,12),None)
     option = EuropeanOption("SPX-X-Y", inst, '2021-11-11', 100)
     print(inst.type())

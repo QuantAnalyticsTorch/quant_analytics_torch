@@ -1,6 +1,7 @@
 # Copyright (c) Quant Analytics. All rights reserved.
 from quant_analytics_torch.marketdata import marketdatarepository
 from quant_analytics_torch.instruments import instruments
+from quant_analytics_torch.instruments import currencies
 from quant_analytics_torch.interpolators import interpolate
 
 import torch
@@ -55,7 +56,7 @@ class ForwardModelComponent(ModelComponentBase):
 
 if __name__ == '__main__':
     marketdatarepository.fillSampleDate(marketdatarepository.marketDataRepositorySingleton)
-    inst = instruments.Asset("SPX")
+    inst = instruments.Asset("SPX", currencies.USD)
     fwd = instruments.Forward("SPX-1", inst )
 
     model = Model(datetime.datetime.now())
