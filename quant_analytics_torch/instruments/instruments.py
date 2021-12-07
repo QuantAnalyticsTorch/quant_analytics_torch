@@ -14,6 +14,16 @@ class InstrumentBase(object):
     def id(self):
         return None
 
+class CashDeposit(InstrumentBase):
+    def __init__(self, name : str, ccy : currencies, maturity : datetime.datetime):
+        super().__init__()        
+        self.name = name
+        self.ccy = ccy
+        self.maturity = maturity
+
+    def id(self):
+        return { self.type() : { self.ccy.toString() : self.maturity } }
+
 class Asset(InstrumentBase):
     def __init__(self, name : str, ccy : currencies):
         super().__init__()        
@@ -58,4 +68,7 @@ if __name__ == '__main__':
     print(option.type())
     print(option.id())    
 
-    
+    cashDepo = CashDeposit("USD-1y", currencies.USD, datetime.datetime(2022,12,12))
+
+    print(cashDepo.type())
+    print(cashDepo.id())    
