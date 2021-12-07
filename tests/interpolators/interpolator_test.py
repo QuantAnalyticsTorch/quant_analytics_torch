@@ -11,7 +11,7 @@ def test_interpolator():
 
     ip = interpolate.LinearInterpolator(a,b)
 
-    v = ip[1.5]
+    v = ip(1.5)
 
     assert abs(v - 2.5) < constants.EPSILON
 

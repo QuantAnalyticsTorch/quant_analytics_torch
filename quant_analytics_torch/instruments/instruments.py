@@ -14,6 +14,9 @@ class InstrumentBase(object):
     def id(self):
         return None
 
+    def ccy(self):
+        return None
+
 class CashDeposit(InstrumentBase):
     def __init__(self, name : str, ccy : currencies, maturity : datetime.datetime):
         super().__init__()        
@@ -24,6 +27,9 @@ class CashDeposit(InstrumentBase):
     def id(self):
         return { self.type() : { self.ccy.toString() : self.maturity } }
 
+    def ccy(self):
+        return self.ccy
+
 class Asset(InstrumentBase):
     def __init__(self, name : str, ccy : currencies):
         super().__init__()        
@@ -33,6 +39,9 @@ class Asset(InstrumentBase):
     def id(self):
         return { self.type() : { self.name : self.ccy.toString() } }
 
+    def ccy(self):
+        return self.ccy
+
 class Forward(InstrumentBase):
     def __init__(self, name : str, inst : InstrumentBase, maturity = datetime.datetime.now(), strike = float('NaN'), ccy = currencies.Currency() ):
         super().__init__()        
@@ -40,9 +49,14 @@ class Forward(InstrumentBase):
         self.inst = inst
         self.maturity = maturity
         self.strike = strike
+        self.ccy = ccy
 
     def id(self):
         return { self.type() : { self.inst.name : { self.maturity : self.strike } } }
+
+    def ccy(self):
+        return self.ccy
+
 
 class EuropeanOption(InstrumentBase):
     def __init__(self, name : str, inst : InstrumentBase, maturity : str, strike : float, ccy = currencies.Currency()):
@@ -51,9 +65,14 @@ class EuropeanOption(InstrumentBase):
         self.inst = inst
         self.maturity = maturity
         self.strike = strike
+        self.ccy = ccy        
 
     def id(self):
         return { self.type() : { self.inst.name : { self.maturity : self.strike } } }
+
+    def ccy(self):
+        return self.ccy
+
 
 if __name__ == '__main__':
     inst = Asset("SPX", currencies.USD)

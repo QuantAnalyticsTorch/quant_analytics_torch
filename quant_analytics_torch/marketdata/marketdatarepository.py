@@ -4,6 +4,7 @@ from quant_analytics_torch.instruments import instruments
 from quant_analytics_torch.instruments import currencies
 
 import datetime
+import sys
 
 
 def recursive_insert(d,a,x):
@@ -47,17 +48,24 @@ def fillSampleDate(marketData : MarketDataRepository):
     md_2 = marketdata.MarketData(inst_2, 100.)
     marketData.storeMarketData(md_2)
 
-    fwd_1 = instruments.Forward("SPX-1", inst_1, datetime.datetime(2021,12,12) )
-    fwd_2 = instruments.Forward("SPX-2", inst_1, datetime.datetime(2022,12,12) )
-    fwd_3 = instruments.Forward("SPX-3", inst_1, datetime.datetime(2023,12,12) )
+    fwds = []
+    cashdeposits = []
 
-    fwd = [fwd_1, fwd_2, fwd_3]
+    fwd_dates = [datetime.datetime(2021,12,12), datetime.datetime(2022,12,12), datetime.datetime(2023,12,12)]
     fva = [101., 102., 103.]    
+    dfs = [0.99, 0.98, 0.97]        
 
-    for i,f in enumerate(fwd):
+    for j,jt in enumerate(fwd_dates):
+        fwds.append( instruments.Forward("SPX-" + str(j), inst_1, jt ) )
+        cashdeposits.append( instruments.CashDeposit("USD-" + str(j), currencies.USD, jt ) )        
+
+    for i,f in enumerate(fwds):
         md = marketdata.MarketData(f,fva[i])
         marketData.storeMarketData(md)
 
+    for i,f in enumerate(cashdeposits):
+        md = marketdata.MarketData(f,dfs[i])
+        marketData.storeMarketData(md)
 
 if __name__ == '__main__':
     fillSampleDate(marketDataRepositorySingleton)
@@ -75,5 +83,12 @@ if __name__ == '__main__':
     fwd_1 = instruments.Forward("SPX-1", inst_1, datetime.datetime(2021,12,12) )
 
     md = marketDataRepositorySingleton[{ fwd_1.type() : inst_1.name }]
+
+    print(md)
+
+    # Get the cash deposit data
+    cashdeposit = instruments.CashDeposit(None, currencies.USD, datetime.datetime.now() )
+
+    md = marketDataRepositorySingleton[{ cashdeposit.type() : cashdeposit.ccy.toString() }]
 
     print(md)
