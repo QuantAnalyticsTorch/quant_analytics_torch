@@ -51,7 +51,7 @@ class DiscountModelComponent(ModelComponentBase):
 
         self.ip = interpolate.LinearInterpolator(times,cashdepos)
 
-    def discountfactor(self, time):
+    def discountFactor(self, time):
         return self.ip(time)
 
 
@@ -81,16 +81,36 @@ class ForwardModelComponent(ModelComponentBase):
     def forward(self, time):
         return self.ip(time)
 
-if __name__ == '__main__':
+
+def fillSampleModel(inst : instruments.Asset):
     marketdatarepository.fillSampleDate(marketdatarepository.marketDataRepositorySingleton)
-    inst = instruments.Asset("SPX", currencies.USD)
-    fwd = instruments.Forward("SPX-1", inst )
 
     model = Model(datetime.datetime.now())
     dmc = DiscountModelComponent(model, marketdatarepository.marketDataRepositorySingleton, inst.ccy )
     model.discountfactors[inst.ccy.toString()] = dmc
     fmc = ForwardModelComponent(model, marketdatarepository.marketDataRepositorySingleton, inst)
     model.forwards[inst.name] = fmc
+
+    return model
+
+
+if __name__ == '__main__':
+
+
+    marketdatarepository.fillSampleDate(marketdatarepository.marketDataRepositorySingleton)
+    inst = instruments.Asset("SPX", currencies.USD)
+    fwd = instruments.Forward("SPX-1", inst )
+
+    model = fillSampleModel(inst)
+
+    #model = Model(datetime.datetime.now())
+    #dmc = DiscountModelComponent(model, marketdatarepository.marketDataRepositorySingleton, inst.ccy )
+    #model.discountfactors[inst.ccy.toString()] = dmc
+    #fmc = ForwardModelComponent(model, marketdatarepository.marketDataRepositorySingleton, inst)
+    #model.forwards[inst.name] = fmc
+
+    dmc = model.discountfactors[inst.ccy.toString()]
+    fmc = model.forwards[inst.name]
 
     v = fmc.forward(1.5)
 
@@ -104,4 +124,4 @@ if __name__ == '__main__':
         print(param.getValue().grad)
         param.grad = None
 
-    print(model.discountfactors[inst.ccy.toString()].discountfactor(1.4))
+    print(model.discountfactors[inst.ccy.toString()].discountFactor(1.4))

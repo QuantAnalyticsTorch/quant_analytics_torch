@@ -2,6 +2,7 @@
 from quant_analytics_torch.instruments import currencies
 
 import datetime
+from enum import Enum
 
 
 class InstrumentBase(object):
@@ -74,10 +75,25 @@ class EuropeanOption(InstrumentBase):
         return self.ccy
 
 
+# Also have some synthetic data
+class SSVIVolatility(InstrumentBase):
+    def __init__(self, name : str, inst : InstrumentBase, maturity : str, paramType : str):
+        super().__init__()        
+        self.name = name
+        self.inst = inst
+        self.maturity = maturity
+        self.paramType = paramType
+
+    def id(self):
+        return { self.type() : { self.inst.name : { self.maturity : self.paramType } } }
+
+    def ccy(self):
+        return self.ccy
+
 if __name__ == '__main__':
     inst = Asset("SPX", currencies.USD)
     fwd = Forward("SPX-2011", inst, datetime.datetime(2021,12,12),None)
-    option = EuropeanOption("SPX-X-Y", inst, '2021-11-11', 100)
+    option = EuropeanOption("SPX-X-Y", inst, '2021-11-11', 100.)
     print(inst.type())
     print(inst.id())    
 
@@ -91,3 +107,9 @@ if __name__ == '__main__':
 
     print(cashDepo.type())
     print(cashDepo.id())    
+
+    ssviVolatilityTheta = SSVIVolatility("SSVI-1y-Theta", inst, datetime.datetime(2022,12,12), "Theta")
+    ssviVolatilityTheta = SSVIVolatility("SSVI-2y-Theta", inst, datetime.datetime(2023,12,12), "Theta")    
+
+    print(ssviVolatilityTheta.type())
+    print(ssviVolatilityTheta.id())    

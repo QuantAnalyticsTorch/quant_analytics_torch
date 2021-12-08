@@ -92,3 +92,17 @@ if __name__ == '__main__':
     md = marketDataRepositorySingleton[{ cashdeposit.type() : cashdeposit.ccy.toString() }]
 
     print(md)
+
+    # Get the cash deposit data
+    ssviVolatilityTheta = instruments.SSVIVolatility("SSVI-1y-Theta", inst_1, datetime.datetime(2022,12,12), "Theta")
+    md_theta = marketdata.MarketData(ssviVolatilityTheta, 0.2)    
+    marketDataRepositorySingleton.storeMarketData(md_theta)
+
+    ssviVolatilityBeta = instruments.SSVIVolatility("SSVI-1y-Beta", inst_1, datetime.datetime(2022,12,12), "Beta")
+    md_beta = marketdata.MarketData(ssviVolatilityBeta, 0.2)    
+    marketDataRepositorySingleton.storeMarketData(md_beta)
+
+    md_ssvi = marketDataRepositorySingleton[{ ssviVolatilityTheta.type() : inst_1.name }]
+
+    print(md_ssvi)
+

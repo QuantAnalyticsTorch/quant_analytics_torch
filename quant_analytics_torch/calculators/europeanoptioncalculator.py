@@ -1,0 +1,1 @@
+# Copyright (c) Quant Analytics. All rights reserved.
