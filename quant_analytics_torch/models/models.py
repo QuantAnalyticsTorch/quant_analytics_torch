@@ -14,6 +14,7 @@ class Model(torch.nn.Module):
         self.internalCurves = {}
         self.discountfactors = torch.nn.ModuleDict({})
         self.forwards = torch.nn.ModuleDict({})
+        self.volatilities = torch.nn.ModuleDict({})        
 
     def dateToTime(self, date):
         return (date - self.modelDate).days / 365.
@@ -81,6 +82,60 @@ class ForwardModelComponent(ModelComponentBase):
     def forward(self, time):
         return self.ip(time)
 
+class VolatilityModelComponent(ModelComponentBase):
+    def __init__(self, model : Model, marketData : marketdatarepository.MarketDataRepository, inst : instruments.InstrumentBase):
+        super().__init__()
+        self.param = torch.nn.ParameterList()        
+
+
+class SSVIVolatilityModelComponent(VolatilityModelComponent):
+    def __init__(self, model : Model, marketData : marketdatarepository.MarketDataRepository, inst : instruments.InstrumentBase):
+        super().__init__(model, marketData, inst)
+        self.param = torch.nn.ParameterList()
+        self.theta_ip = None
+        self.beta_ip = None
+        self.rho_ip = None                
+
+        ssvi_inst = instruments.SSVIVolatility(None, inst)
+        
+        # Create an index into the market data repository
+        idx = { ssvi_inst.type() : inst.name }
+        # Get the market data out of the market data repository
+        md = marketData[idx]
+        times = torch.zeros(size=(len(md),))
+
+        # Placeholder for thetas, betas and rhos
+        thetas = torch.zeros(size=(len(md),))
+        betas = torch.zeros(size=(len(md),))
+        rhos = torch.zeros(size=(len(md),))                
+
+#        fwds = torch.zeros(size=(len(md),))
+        for i,it in enumerate(md):
+            times[i] = model.dateToTime(it)
+            mdi = md[it]
+            for j,jt in enumerate(mdi):
+                mdj = mdi[jt]
+                x = mdj.md.getValue()
+                if mdj.inst.paramType == instruments.SSVIParam.Theta:
+                    thetas[i] = x
+                if mdj.inst.paramType == instruments.SSVIParam.Beta:
+                    betas[i] = x                    
+                if mdj.inst.paramType == instruments.SSVIParam.Rho:
+                    rhos[i] = x
+                # Append the market parameter
+                self.param.append(mdj.md)            
+
+        self.theta_ip = interpolate.LinearInterpolator(times, thetas)
+        self.beta_ip = interpolate.LinearInterpolator(times, betas)
+        self.rho_ip = interpolate.LinearInterpolator(times, rhos)                
+
+    def volatility(self, time, strike):
+        theta = self.theta_ip(time)
+        beta = self.beta_ip(time)
+        rho = self.rho_ip(time)                
+
+        return theta + beta + rho + strike
+
 
 def fillSampleModel(inst : instruments.Asset):
     marketdatarepository.fillSampleDate(marketdatarepository.marketDataRepositorySingleton)
@@ -90,6 +145,8 @@ def fillSampleModel(inst : instruments.Asset):
     model.discountfactors[inst.ccy.toString()] = dmc
     fmc = ForwardModelComponent(model, marketdatarepository.marketDataRepositorySingleton, inst)
     model.forwards[inst.name] = fmc
+    vmc = SSVIVolatilityModelComponent(model, marketdatarepository.marketDataRepositorySingleton, inst)
+    model.volatilities[inst.name] = vmc
 
     return model
 
@@ -103,16 +160,13 @@ if __name__ == '__main__':
 
     model = fillSampleModel(inst)
 
-    #model = Model(datetime.datetime.now())
-    #dmc = DiscountModelComponent(model, marketdatarepository.marketDataRepositorySingleton, inst.ccy )
-    #model.discountfactors[inst.ccy.toString()] = dmc
-    #fmc = ForwardModelComponent(model, marketdatarepository.marketDataRepositorySingleton, inst)
-    #model.forwards[inst.name] = fmc
-
+    # Get the model components
     dmc = model.discountfactors[inst.ccy.toString()]
     fmc = model.forwards[inst.name]
+    vmc = model.volatilities[inst.name]    
 
-    v = fmc.forward(1.5)
+    #v = fmc.forward(1.5)
+    v = vmc.volatility(1.5, 100)    
 
     # Run the graph backwards
     v.backward(create_graph=True)

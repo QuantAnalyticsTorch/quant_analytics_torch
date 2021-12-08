@@ -67,6 +67,33 @@ def fillSampleDate(marketData : MarketDataRepository):
         md = marketdata.MarketData(f,dfs[i])
         marketData.storeMarketData(md)
 
+
+    # Get the cash deposit data
+    ssviVolatilityTheta = instruments.SSVIVolatility("SSVI-1y-Theta", inst_1, datetime.datetime(2022,12,12), instruments.SSVIParam.Theta)
+    md_theta = marketdata.MarketData(ssviVolatilityTheta, 0.2)    
+    marketDataRepositorySingleton.storeMarketData(md_theta)
+
+    ssviVolatilityBeta = instruments.SSVIVolatility("SSVI-1y-Beta", inst_1, datetime.datetime(2022,12,12), instruments.SSVIParam.Beta)
+    md_beta = marketdata.MarketData(ssviVolatilityBeta, 3.0)    
+    marketDataRepositorySingleton.storeMarketData(md_beta)
+
+    ssviVolatilityRho = instruments.SSVIVolatility("SSVI-1y-Rho", inst_1, datetime.datetime(2022,12,12), instruments.SSVIParam.Rho)
+    md_rho = marketdata.MarketData(ssviVolatilityRho, -0.5)    
+    marketDataRepositorySingleton.storeMarketData(md_rho)
+
+    ssviVolatilityTheta = instruments.SSVIVolatility("SSVI-2y-Theta", inst_1, datetime.datetime(2023,12,12), instruments.SSVIParam.Theta)
+    md_theta = marketdata.MarketData(ssviVolatilityTheta, 0.2)    
+    marketDataRepositorySingleton.storeMarketData(md_theta)
+
+    ssviVolatilityBeta = instruments.SSVIVolatility("SSVI-2y-Beta", inst_1, datetime.datetime(2023,12,12), instruments.SSVIParam.Beta)
+    md_beta = marketdata.MarketData(ssviVolatilityBeta, 3.0)    
+    marketDataRepositorySingleton.storeMarketData(md_beta)
+
+    ssviVolatilityRho = instruments.SSVIVolatility("SSVI-2y-Rho", inst_1, datetime.datetime(2023,12,12), instruments.SSVIParam.Rho)
+    md_rho = marketdata.MarketData(ssviVolatilityRho, -0.5)    
+    marketDataRepositorySingleton.storeMarketData(md_rho)
+
+
 if __name__ == '__main__':
     fillSampleDate(marketDataRepositorySingleton)
     inst_1 = instruments.Asset("SPX", currencies.USD)
@@ -94,15 +121,8 @@ if __name__ == '__main__':
     print(md)
 
     # Get the cash deposit data
-    ssviVolatilityTheta = instruments.SSVIVolatility("SSVI-1y-Theta", inst_1, datetime.datetime(2022,12,12), "Theta")
-    md_theta = marketdata.MarketData(ssviVolatilityTheta, 0.2)    
-    marketDataRepositorySingleton.storeMarketData(md_theta)
+    ssviVolatility = instruments.SSVIVolatility(None, inst_1)
 
-    ssviVolatilityBeta = instruments.SSVIVolatility("SSVI-1y-Beta", inst_1, datetime.datetime(2022,12,12), "Beta")
-    md_beta = marketdata.MarketData(ssviVolatilityBeta, 0.2)    
-    marketDataRepositorySingleton.storeMarketData(md_beta)
-
-    md_ssvi = marketDataRepositorySingleton[{ ssviVolatilityTheta.type() : inst_1.name }]
+    md_ssvi = marketDataRepositorySingleton[{ ssviVolatility.type() : inst_1.name }]
 
     print(md_ssvi)
-

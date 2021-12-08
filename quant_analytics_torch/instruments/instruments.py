@@ -2,7 +2,7 @@
 from quant_analytics_torch.instruments import currencies
 
 import datetime
-from enum import Enum
+from enum import Enum, auto
 
 
 class InstrumentBase(object):
@@ -75,9 +75,15 @@ class EuropeanOption(InstrumentBase):
         return self.ccy
 
 
+class SSVIParam(Enum):
+    Theta = auto()
+    Beta = auto()
+    Rho = auto()
+
+
 # Also have some synthetic data
 class SSVIVolatility(InstrumentBase):
-    def __init__(self, name : str, inst : InstrumentBase, maturity : str, paramType : str):
+    def __init__(self, name : str, inst : InstrumentBase, maturity = datetime.datetime.now(), paramType = None):
         super().__init__()        
         self.name = name
         self.inst = inst
@@ -108,8 +114,8 @@ if __name__ == '__main__':
     print(cashDepo.type())
     print(cashDepo.id())    
 
-    ssviVolatilityTheta = SSVIVolatility("SSVI-1y-Theta", inst, datetime.datetime(2022,12,12), "Theta")
-    ssviVolatilityTheta = SSVIVolatility("SSVI-2y-Theta", inst, datetime.datetime(2023,12,12), "Theta")    
+    ssviVolatilityTheta = SSVIVolatility("SSVI-1y-Theta", inst, datetime.datetime(2022,12,12), SSVIParam.Theta)
+    ssviVolatilityTheta = SSVIVolatility("SSVI-2y-Theta", inst, datetime.datetime(2023,12,12), SSVIParam.Theta)    
 
     print(ssviVolatilityTheta.type())
     print(ssviVolatilityTheta.id())    
