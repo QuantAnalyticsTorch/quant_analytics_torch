@@ -4,7 +4,7 @@ Quantitative analytics with Pytorch and Deep learning
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/QuantAnalyticsTorch/quant_analytics_torch/blob/main/docs/source/examples/SSVICalibration.ipynb)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/QuantAnalyticsTorch/quant_analytics_torch.git/main?urlpath=lab%2Ftree%2Fdocs%2Fsource%2Fexamples)
 
-Further documentation https://quantanalyticstorch.github.io/
+Further documentation https://quant-analytics-torch.readthedocs.io/
 
 ```bash
 pip install quant-analytics-torch
