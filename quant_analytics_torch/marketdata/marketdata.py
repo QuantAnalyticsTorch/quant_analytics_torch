@@ -24,29 +24,3 @@ class MarketData(object):
         self.inst = inst
         self.md = MarketParameter(torch.tensor(value, requires_grad=True), True, { 'type' : inst.type(), 'id' : inst.id() })
         self.details = details
-
-
-if __name__ == '__main__':
-    inst = instruments.Asset("SPX", currencies.USD)
-    md = MarketData(inst, 100., { 'ccy' : "EUR" })
-    #print(md.inst.type())
-    #print(md.inst.id())
-    #print(md.details)    
-    param = md.md
-    #print(param.getName())
-    print(param.getValue())
-
-    w = param.getValue()*param.getValue()
-    print(w)
-    w.backward()
-    #w.gradient(create_graph=True)
-
-    print(param.getValue().grad)
-
-    #x = 100.
-    #mp = MarketParameter(torch.tensor(x, requires_grad=True), True, { 'type' : inst.type(), 'id' : inst.id() })
-    #print(mp)
-    #w = mp.getValue()*mp.getValue()
-    #w.backward()
-    #z = mp.getValue()
-    #print(z.grad)
