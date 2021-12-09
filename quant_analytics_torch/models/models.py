@@ -138,6 +138,7 @@ class SSVIVolatilityModelComponent(VolatilityModelComponent):
 
 
 def fillSampleModel(inst : instruments.Asset):
+    # Fill with sample market data first
     marketdatarepository.fillSampleDate(marketdatarepository.marketDataRepositorySingleton)
 
     model = Model(datetime.datetime.now())
@@ -149,7 +150,6 @@ def fillSampleModel(inst : instruments.Asset):
     model.volatilities[inst.name] = vmc
 
     return model
-
 
 if __name__ == '__main__':
 
