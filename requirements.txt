@@ -69,6 +69,8 @@ pyasn1-modules==0.2.8
 Pygments==2.7.2
 pyparsing==2.4.7
 pytest==6.1.2
+pytest-cov
+pytest-html
 python-dateutil==2.8.1
 pytz==2020.4
 pywin32==300 ; sys_platform == 'win32'
