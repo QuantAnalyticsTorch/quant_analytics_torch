@@ -48,6 +48,9 @@ Thumbs.db
 *.mov
 *.wmv
 
+# Notebook checkpoints
+*checkpoint.ipynb
+
 # Ignore venv
 venv
 
