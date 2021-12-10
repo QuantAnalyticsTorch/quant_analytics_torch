@@ -56,4 +56,4 @@ def test_models():
 
 
 if __name__ == '__main__':
-    models_test()
+    test_models()
