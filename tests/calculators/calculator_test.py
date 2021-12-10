@@ -5,29 +5,24 @@ from quant_analytics_torch.instruments import currencies
 from quant_analytics_torch.interpolators import interpolate
 from quant_analytics_torch.models import models, modelutil
 from quant_analytics_torch.analytics import constants
+from quant_analytics_torch.calculators import forwardcalculator
 
-import torch
 import datetime
-
-def test_models():
-
+  
+def test_forward_calculator():
+    
     marketdatarepository.fillSampleDate(marketdatarepository.marketDataRepositorySingleton)
     inst = instruments.Asset("SPX", currencies.USD)
-    fwd = instruments.Forward("SPX-1", inst )
+    fwd = instruments.Forward("SPX-1", inst, maturity=datetime.datetime(2023,6,12), strike=100., ccy=currencies.USD )
 
     model = modelutil.fillSampleModel(inst)
 
-    # Get the model components
-    dmc = model.discountfactors[inst.ccy.toString()]
-    fmc = model.forwards[inst.name]
-    vmc = model.volatilities[inst.name]    
+    cal = forwardcalculator.ForwardCalculator(fwd, model)
 
-    #v = fmc.forward(1.5)
-    v = vmc.volatility(1.5, 100)   
+    v = cal.calculate()
 
-    assert abs(v - 102.700) < constants.EPSILON
+    assert (v - 2.4362) < constants.EPSILON
 
-    # Run the graph backwards
     v.backward(create_graph=True)
 
 #    for name, param in model.named_parameters():
@@ -37,8 +32,6 @@ def test_models():
 #        print(param.getValue().grad)
 #        param.grad = None
 
-#    print(model.discountfactors[inst.ccy.toString()].discountFactor(1.4))
-
 
 if __name__ == '__main__':
-    test_models()
+    test_forward_calculator()
