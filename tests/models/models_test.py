@@ -23,21 +23,21 @@ def test_models():
     vmc = model.volatilities[inst.name]    
 
     #v = fmc.forward(1.5)
-    v = vmc.volatility(1.5, 100)   
+    v = vmc.volatility(1.5, 80)   
 
-    assert abs(v - 102.700) < constants.EPSILON
+    print(v)
+
+    #assert abs(v - 0.2253) < constants.EPSILON
 
     # Run the graph backwards
     v.backward(create_graph=True)
 
-#    for name, param in model.named_parameters():
-#        print(name)
-#        print(param.getName())
-#        print(param.getValue())
-#        print(param.getValue().grad)
-#        param.grad = None
-
-#    print(model.discountfactors[inst.ccy.toString()].discountFactor(1.4))
+    for name, param in model.named_parameters():
+        print(name)
+        print(param.getName())
+        print(param.getValue())
+        print(param.getValue().grad)
+        param.grad = None
 
 
 if __name__ == '__main__':

@@ -2,12 +2,11 @@
 from quant_analytics_torch.instruments import currencies
 
 import datetime
+from dataclasses import dataclass
 from enum import Enum, auto
 
-
+@dataclass
 class InstrumentBase(object):
-    def __init__(self):
-        super().__init__()
 
     def type(self):
         return self.__class__.__name__
@@ -18,12 +17,15 @@ class InstrumentBase(object):
     def ccy(self):
         return None
 
+    def __repr__(self):
+        return None
+
+@dataclass
 class CashDeposit(InstrumentBase):
-    def __init__(self, name : str, ccy : currencies, maturity : datetime.datetime):
-        super().__init__()        
-        self.name = name
-        self.ccy = ccy
-        self.maturity = maturity
+    """ Cash deposit class """
+    name : str
+    ccy : currencies
+    maturity : datetime.datetime = datetime.datetime.now()
 
     def id(self):
         return { self.type() : { self.ccy.toString() : self.maturity } }
@@ -31,11 +33,11 @@ class CashDeposit(InstrumentBase):
     def ccy(self):
         return self.ccy
 
+@dataclass
 class Asset(InstrumentBase):
-    def __init__(self, name : str, ccy : currencies):
-        super().__init__()        
-        self.name = name
-        self.ccy = ccy
+    """Asset class """
+    name : str
+    ccy : currencies
 
     def id(self):
         return { self.type() : { self.name : self.ccy.toString() } }
@@ -43,14 +45,14 @@ class Asset(InstrumentBase):
     def ccy(self):
         return self.ccy
 
+@dataclass
 class Forward(InstrumentBase):
-    def __init__(self, name : str, inst : InstrumentBase, maturity = datetime.datetime.now(), strike = float('NaN'), ccy = currencies.Currency() ):
-        super().__init__()        
-        self.name = name
-        self.inst = inst
-        self.maturity = maturity
-        self.strike = strike
-        self.ccy = ccy
+    """ Forward on an underlying """
+    name : str
+    inst : InstrumentBase
+    maturity : datetime.datetime = datetime.datetime.now()
+    strike : float = float('NaN')
+    ccy : currencies = currencies.USD
 
     def id(self):
         return { self.type() : { self.inst.name : { self.maturity : self.strike } } }
@@ -58,15 +60,14 @@ class Forward(InstrumentBase):
     def ccy(self):
         return self.ccy
 
-
+@dataclass
 class EuropeanOption(InstrumentBase):
-    def __init__(self, name : str, inst : InstrumentBase, maturity : str, strike : float, ccy = currencies.Currency()):
-        super().__init__()        
-        self.name = name
-        self.inst = inst
-        self.maturity = maturity
-        self.strike = strike
-        self.ccy = ccy        
+    """  European option """
+    name : str
+    inst : InstrumentBase
+    maturity : datetime.datetime
+    strike : float
+    ccy : currencies = currencies.USD
 
     def id(self):
         return { self.type() : { self.inst.name : { self.maturity : self.strike } } }
@@ -82,13 +83,12 @@ class SSVIParam(Enum):
 
 
 # Also have some synthetic data
+@dataclass
 class SSVIVolatility(InstrumentBase):
-    def __init__(self, name : str, inst : InstrumentBase, maturity = datetime.datetime.now(), paramType = None):
-        super().__init__()        
-        self.name = name
-        self.inst = inst
-        self.maturity = maturity
-        self.paramType = paramType
+    name : str
+    inst : InstrumentBase
+    maturity : datetime.datetime = datetime.datetime.now()
+    paramType : SSVIParam = SSVIParam.Theta
 
     def id(self):
         return { self.type() : { self.inst.name : { self.maturity : self.paramType } } }
@@ -98,7 +98,7 @@ class SSVIVolatility(InstrumentBase):
 
 if __name__ == '__main__':
     inst = Asset("SPX", currencies.USD)
-    fwd = Forward("SPX-2011", inst, datetime.datetime(2021,12,12),None)
+    fwd = Forward("SPX-2011", inst, datetime.datetime(2021,12,12))
     option = EuropeanOption("SPX-X-Y", inst, '2021-11-11', 100.)
     print(inst.type())
     print(inst.id())    
@@ -113,6 +113,8 @@ if __name__ == '__main__':
 
     print(cashDepo.type())
     print(cashDepo.id())    
+
+    print(str(fwd))
 
     ssviVolatilityTheta = SSVIVolatility("SSVI-1y-Theta", inst, datetime.datetime(2022,12,12), SSVIParam.Theta)
     ssviVolatilityTheta = SSVIVolatility("SSVI-2y-Theta", inst, datetime.datetime(2023,12,12), SSVIParam.Theta)    
