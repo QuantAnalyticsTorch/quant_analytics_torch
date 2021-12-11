@@ -1,5 +1,4 @@
 # Copyright (c) Quant Analytics. All rights reserved.
-from dataclasses_json import dataclass_json
 from dataclasses import dataclass
 
 @dataclass
