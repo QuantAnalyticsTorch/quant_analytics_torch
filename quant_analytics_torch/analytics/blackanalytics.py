@@ -40,16 +40,18 @@ def black_torch_vega_diff(s, k, dt, v, r):
     dx, = torch.autograd.grad(x, [v], create_graph=True, retain_graph=True)
     return dx
 
-def impliedvolatility(p, s, k, dt, feps = 1e-8, veps = 1e-8):
+def impliedvolatility(p, s, k, dt, feps = 1e-8, veps = 1e-8, max_iter = 10):
     v = 0.2
     vp = 0
     pt = black(s, k, dt, v)
+    it = 0
 
-    while((np.abs(p-pt)>feps) and (np.abs(v-vp)>veps)):
+    while((np.abs(p-pt)>feps) and (np.abs(v-vp)>veps) and it < max_iter):
         vp = v
         vega = black_vega(s, k, dt, v)
         v = v - (pt-p)/vega;
         pt = black(s, k, dt, v)
+        it = it + 1
 
     return v
 

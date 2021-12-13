@@ -14,6 +14,7 @@ Examples
    :hidden:
 
    ./examples/SSVICalibration
+   ./examples/EquityCashDividends
 
 Example notebooks
 
@@ -21,8 +22,14 @@ Example notebooks
     :margin: 5 5 0 0
     :gutter: 4
 
-    .. grid-item-card:: :octicon:`rocket;1.5em` SSVI Calibration
+    .. grid-item-card:: SSVI Calibration
         :link: ./examples/SSVICalibration
         :link-type: doc
 
         Example of SSVI calibration
+
+    .. grid-item-card:: Equity cash dividends
+        :link: ./examples/EquityCashDividends
+        :link-type: doc
+
+        Example of equity cash dividend volatility conversion
