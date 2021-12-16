@@ -20,8 +20,8 @@ class ForwardModelComponent(modelcomponentbase.ModelComponentBase):
         idx = { fwd.type() : inst.name }
         # Get the market data out of the market data repository
         md = marketData[idx]
-        times = torch.zeros(size=(len(md),))
-        fwds = torch.zeros(size=(len(md),))
+        times = torch.zeros(size=(len(md),),dtype=torch.double)
+        fwds = torch.zeros(size=(len(md),),dtype=torch.double)
         for i,it in enumerate(md):
             times[i] = model.dateToTime(it)
             mdi = next(iter(md[it].values()))

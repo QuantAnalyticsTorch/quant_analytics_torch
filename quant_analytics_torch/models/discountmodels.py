@@ -20,8 +20,8 @@ class DiscountModelComponent(modelcomponentbase.ModelComponentBase):
         idx = { cashDepo.type() : ccy.toString() }
         # Get the market data out of the market data repository
         md = marketData[idx]
-        times = torch.zeros(size=(len(md),))
-        cashdepos = torch.zeros(size=(len(md),))
+        times = torch.zeros(size=(len(md),),dtype=torch.double)
+        cashdepos = torch.zeros(size=(len(md),),dtype=torch.double)
         for i,it in enumerate(md):
             times[i] = model.dateToTime(it)
             cashdepos[i] = md[it].md.getValue()

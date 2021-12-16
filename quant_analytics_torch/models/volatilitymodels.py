@@ -31,9 +31,9 @@ class SSVIVolatilityModelComponent(VolatilityModelComponent):
         times = torch.zeros(size=(len(md),))
 
         # Placeholder for thetas, betas and rhos
-        thetas = torch.zeros(size=(len(md),))
-        betas = torch.zeros(size=(len(md),))
-        rhos = torch.zeros(size=(len(md),))                
+        thetas = torch.zeros(size=(len(md),),dtype=torch.double)
+        betas = torch.zeros(size=(len(md),),dtype=torch.double)
+        rhos = torch.zeros(size=(len(md),),dtype=torch.double)                
 
         fwds = torch.zeros(size=(len(md),))
         for i,it in enumerate(md):

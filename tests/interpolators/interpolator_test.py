@@ -5,9 +5,9 @@ from quant_analytics_torch.analytics import constants
 import torch
 
 def test_interpolator():
-    a = torch.tensor([0.,1.,2.],requires_grad=True)
-    b = torch.tensor([0.,1.,4.],requires_grad=True)
-    x = torch.tensor(1.5,requires_grad=True)
+    a = torch.tensor([0.,1.,2.],requires_grad=True, dtype=torch.double)
+    b = torch.tensor([0.,1.,4.],requires_grad=True, dtype=torch.double)
+    x = torch.tensor(1.5,requires_grad=True, dtype=torch.double)
 
     ip = interpolate.LinearInterpolator(a,b)
 

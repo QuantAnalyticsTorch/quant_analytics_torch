@@ -22,5 +22,5 @@ class MarketData(object):
     def __init__(self, inst : instruments.InstrumentBase, value : float, details = dict() ):
         super(MarketData, self).__init__()
         self.inst = inst
-        self.md = MarketParameter(torch.tensor(value, requires_grad=True), True, { 'type' : inst.type(), 'id' : inst.id() })
+        self.md = MarketParameter(torch.tensor(value, requires_grad=True, dtype=torch.double), True, { 'type' : inst.type(), 'id' : inst.id() })
         self.details = details

@@ -17,12 +17,13 @@ def black_gamma(s, k, dt, v, r=0.0):
     d1 = np.log(s / k) / std + 0.5 * std;
     return norm.pdf(d1)/s/std;
 
-def black_torch(s, k, dt, v, r):
+def black_torch(f : torch.tensor, k : torch.tensor, dt : torch.tensor, v : torch.tensor) -> torch.tensor:
+    """ Black Scholes formula """
     n = torch.distributions.Normal(0, 1).cdf
     sdt = v * torch.sqrt(dt)
-    d1 = (torch.log(s / k) + (r + v * v / 2) * dt) / sdt
+    d1 = torch.log(f / k) / sdt + v * v * sdt / 2
     d2 = d1 - sdt
-    return s * n(d1) - k * torch.exp(-r * dt) * n(d2)
+    return f * n(d1) - k * n(d2)
 
 def black_torch_delta(s, k, dt, v, r):
     n = torch.distributions.Normal(0, 1).cdf

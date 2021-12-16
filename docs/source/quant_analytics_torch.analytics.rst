@@ -28,6 +28,14 @@ quant\_analytics\_torch.analytics.constants module
    :undoc-members:
    :show-inheritance:
 
+quant\_analytics\_torch.analytics.maxsoft module
+------------------------------------------------
+
+.. automodule:: quant_analytics_torch.analytics.maxsoft
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 quant\_analytics\_torch.analytics.norminv module
 ------------------------------------------------
 

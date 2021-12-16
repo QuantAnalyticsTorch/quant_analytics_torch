@@ -4,6 +4,14 @@ quant\_analytics\_torch.calculators package
 Submodules
 ----------
 
+quant\_analytics\_torch.calculators.basecalculator module
+---------------------------------------------------------
+
+.. automodule:: quant_analytics_torch.calculators.basecalculator
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 quant\_analytics\_torch.calculators.deeplearningconditionalexpectation module
 -----------------------------------------------------------------------------
 
@@ -16,6 +24,22 @@ quant\_analytics\_torch.calculators.deeplearninghedgingengine module
 --------------------------------------------------------------------
 
 .. automodule:: quant_analytics_torch.calculators.deeplearninghedgingengine
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+quant\_analytics\_torch.calculators.europeanoptioncalculator module
+-------------------------------------------------------------------
+
+.. automodule:: quant_analytics_torch.calculators.europeanoptioncalculator
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+quant\_analytics\_torch.calculators.forwardcalculator module
+------------------------------------------------------------
+
+.. automodule:: quant_analytics_torch.calculators.forwardcalculator
    :members:
    :undoc-members:
    :show-inheritance:
