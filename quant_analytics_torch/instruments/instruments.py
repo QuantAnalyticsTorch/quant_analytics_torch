@@ -7,6 +7,8 @@ from enum import Enum, auto
 
 @dataclass
 class InstrumentBase(object):
+    """ Instrument base class """
+    datesInstruments = {}
 
     def type(self):
         return self.__class__.__name__
@@ -18,7 +20,13 @@ class InstrumentBase(object):
         return None
 
     def __repr__(self):
-        return None
+        pass
+
+    def payoff(self):
+        pass
+
+    def datesInstruments(self):
+        return self.datesInstruments
 
 @dataclass
 class CashDeposit(InstrumentBase):
@@ -45,6 +53,10 @@ class Asset(InstrumentBase):
     def ccy(self):
         return self.ccy
 
+    def __get__(self, date : datetime.datetime):
+        pass
+
+
 @dataclass
 class Forward(InstrumentBase):
     """ Forward on an underlying """
@@ -60,6 +72,10 @@ class Forward(InstrumentBase):
     def ccy(self):
         return self.ccy
 
+    def payoff(self):
+        pass
+
+
 @dataclass
 class EuropeanOption(InstrumentBase):
     """  European option """
@@ -74,6 +90,9 @@ class EuropeanOption(InstrumentBase):
 
     def ccy(self):
         return self.ccy
+
+#    def __get__(self, evolutionGenerator : evoluationGeneratorBase, stateTensor):
+#        return None
 
 
 class SSVIParam(Enum):

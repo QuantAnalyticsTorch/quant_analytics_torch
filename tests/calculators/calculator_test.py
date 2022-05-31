@@ -24,8 +24,9 @@ def test_forward_calculator():
     cal = forwardcalculator.ForwardCalculator(fwd, model)
 
     v = cal.calculate()
+    print(v)
 
-    assert (v - 2.4362) < constants.EPSILON
+    assert abs(v - 2.4361986113717453) < constants.EPSILON
 
     v.backward(create_graph=True)
 
@@ -51,7 +52,7 @@ def test_european_option_calculator():
 
     print(v)
 
-    assert (v - 11.9508471960064906) < constants.EPSILON
+    assert abs(v - 10.2745974053216322) < constants.EPSILON
 
     v.backward(create_graph=True)
 
@@ -65,5 +66,5 @@ def test_european_option_calculator():
 
 
 if __name__ == '__main__':
-    #test_forward_calculator()
-    test_european_option_calculator()    
+    test_forward_calculator()
+    #test_european_option_calculator()    

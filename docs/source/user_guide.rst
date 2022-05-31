@@ -30,3 +30,9 @@ This provides some further guidance to the user
         :link-type: doc
 
         Analytics examples
+
+    .. grid-item-card:: :octicon:`light-bulb;1.5em` Calculators
+        :link: calculators
+        :link-type: doc
+
+        Calculators examples        

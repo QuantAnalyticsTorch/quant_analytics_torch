@@ -2,7 +2,7 @@
 from quant_analytics_torch.marketdata import marketdatarepository
 from quant_analytics_torch.instruments import instruments
 from quant_analytics_torch.instruments import currencies
-from quant_analytics_torch.models import models, discountmodels, forwardmodels, volatilitymodels
+from quant_analytics_torch.models import models, discountmodels, forwardmodels, volatilitymodels, dynamicmodels
 from quant_analytics_torch.analytics import constants
 
 import torch
@@ -19,5 +19,7 @@ def fillSampleModel(inst : instruments.Asset):
     model.forwards[inst.name] = fmc
     vmc = volatilitymodels.SSVIVolatilityModelComponent(model, marketdatarepository.marketDataRepositorySingleton, inst)
     model.volatilities[inst.name] = vmc
+#    lmc = dynamicmodels.LognormalModelComponent()
+#    model.dynamics[inst.name] = lmc
 
     return model

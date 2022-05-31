@@ -64,3 +64,5 @@ build
 html
 
 examples/logs
+
+*tmp*
