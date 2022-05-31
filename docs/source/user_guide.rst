@@ -9,6 +9,7 @@ User guide
    :hidden:
 
    analytics
+   calculators
    examples
 
 
