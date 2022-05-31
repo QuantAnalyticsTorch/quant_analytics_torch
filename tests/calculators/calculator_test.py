@@ -52,7 +52,7 @@ def test_european_option_calculator():
 
     print(v)
 
-    assert abs(v - 10.2745974053216322) < constants.EPSILON
+    assert abs(v - 10.2051623952553658) < constants.EPSILON
 
     v.backward(create_graph=True)
 
@@ -67,4 +67,4 @@ def test_european_option_calculator():
 
 if __name__ == '__main__':
     test_forward_calculator()
-    #test_european_option_calculator()    
+    test_european_option_calculator()    
