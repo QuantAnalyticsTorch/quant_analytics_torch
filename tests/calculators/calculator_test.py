@@ -56,6 +56,7 @@ def test_european_option_calculator():
 
     v.backward(create_graph=True)
 
+
 #    for name, param in model.named_parameters():
 #        print(name)
 #        print(param.getName())
