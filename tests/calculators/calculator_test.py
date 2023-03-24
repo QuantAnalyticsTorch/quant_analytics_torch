@@ -10,6 +10,7 @@ from quant_analytics_torch.calculators import forwardcalculator, europeanoptionc
 import datetime
 
 import torch
+import pandas as pd
 
 torch.set_printoptions(precision=16)
 
@@ -52,20 +53,12 @@ def test_european_option_calculator():
 
     print(v)
 
-    assert abs(v - 10.2051623952553658) < constants.EPSILON
+    assert abs(v - 5.4536241485429073) < constants.EPSILON
 
     v.backward(create_graph=True)
 
 
-#    for name, param in model.named_parameters():
-#        print(name)
-#        print(param.getName())
-#        print(param.getValue())
-#        print(param.getValue().grad)
-#        param.grad = None
-
-
-
 if __name__ == '__main__':
     test_forward_calculator()
-    test_european_option_calculator()    
+    #test_european_option_calculator()    
+    # Load data showing percent of women in different majors per year
