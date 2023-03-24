@@ -3,6 +3,7 @@ ipython
 matplotlib
 nbsphinx
 numpy
+pandas
 pandoc
 scipy
 sklearn
