@@ -6,7 +6,7 @@ numpy
 pandas
 pandoc
 scipy
-sklearn
+scikit-learn
 sphinx
 sphinx-design
 sphinx-hoverxref
