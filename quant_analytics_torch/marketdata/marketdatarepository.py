@@ -33,6 +33,9 @@ class MarketDataRepository(object):
     def clear(self):
         self.data = {}
 
+    def keys(self):
+        return self.data.keys()
+
     def storeMarketData(self, marketdata : marketdata.MarketData):
         recursive_insert(self.data, marketdata.inst.id(), marketdata )
 

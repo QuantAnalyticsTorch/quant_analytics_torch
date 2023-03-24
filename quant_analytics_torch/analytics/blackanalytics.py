@@ -71,24 +71,30 @@ if __name__ == '__main__':
     time_t = torch.tensor(time, requires_grad=False)
     r_t = torch.tensor(r, requires_grad=False)
 
-    bs = black_torch(forward_t, strike_t, time_t, vol_t, r_t)
-    bsd = black_torch_delta(forward_t, strike_t, time_t, vol_t, r_t)
-    bsdt = black_torch_delta_diff(forward_t, strike_t, time_t, vol_t, r_t)
+    bs = black_torch(forward_t, strike_t, time_t, vol_t)
+    #bsd = black_torch_delta(forward_t, strike_t, time_t, vol_t, r_t)
+    #bsdt = black_torch_delta_diff(forward_t, strike_t, time_t, vol_t, r_t)
 
-    bsvt = black_torch_vega_diff(forward_t, strike_t, time_t, vol_t, r_t)
-    print(bs)
-    print(bsd)
-    print(bsdt)    
-    print(bsvt)
+    #bsvt = black_torch_vega_diff(forward_t, strike_t, time_t, vol_t, r_t)
+    #print(bs)
+    #print(bsd)
+    #print(bsdt)    
+    #print(bsvt)
 
     bsn = black(forward, strike, time, vol)
-    bsv = black_vega(forward, strike, time, vol)
-    bsg = black_gamma(forward, strike, time, vol)
+    #bsv = black_vega(forward, strike, time, vol)
+    #bsg = black_gamma(forward, strike, time, vol)
 
     print(bsn)
-    print(bsv)
-    print(bsg)    
+    #print(bsv)
+    #print(bsg)    
 
-    iv = impliedvolatility(bsn, forward, strike, time)
+    #iv = impliedvolatility(bsn, forward, strike, time)
 
-    print(iv)
+    #print(iv)
+    
+    bs.backward(create_graph=True)
+    
+    #bsn.backward()
+    
+    print(forward_t.grad)

@@ -56,7 +56,6 @@ class Asset(InstrumentBase):
     def __get__(self, date : datetime.datetime):
         pass
 
-
 @dataclass
 class Forward(InstrumentBase):
     """ Forward on an underlying """
