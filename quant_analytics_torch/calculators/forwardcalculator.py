@@ -13,6 +13,26 @@ class ForwardCalculator(basecalculator.BaseCalculator):
 
     def calculate(self):
         t = self.model.dateToTime(self.instrument.maturity)
-        df = self.model.discountfactors[self.instrument.ccy.toString()].discountFactor(t)
+        df = self.model.discountfactors[self.instrument.getCcy().toString()].discountFactor(t)
         fwd =self.model.forwards[self.instrument.inst.name].forward(t)
         return df*(fwd-self.instrument.strike)
+
+
+def test_forward_calculator():
+    
+    marketdatarepository.fillSampleDate(marketdatarepository.marketDataRepositorySingleton)
+    inst = instruments.Asset("SPX", currencies.USD)
+    fwd = instruments.Forward("SPX-1", inst, maturity=datetime.datetime(2023,6,12), strike=100., currency=currencies.USD )
+
+    model = modelutil.fillSampleModel(inst)
+
+    cal = ForwardCalculator(fwd, model)
+
+    v = cal.calculate()
+    print(v)
+
+    v.backward()
+
+
+if __name__ == '__main__':
+    test_forward_calculator()

@@ -14,7 +14,7 @@ class ForwardModelComponent(modelcomponentbase.ModelComponentBase):
         self.param = torch.nn.ParameterList()        
 
         # Build the forward
-        fwd = instruments.Forward(None, inst )
+        fwd = instruments.Forward(None, inst, datetime.datetime.now(), 'NaN', currencies.USD )
 
         # Create an index into the market data repository
         idx = { fwd.type() : inst.name }

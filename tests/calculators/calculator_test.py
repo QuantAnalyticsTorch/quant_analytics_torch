@@ -18,7 +18,7 @@ def test_forward_calculator():
     
     marketdatarepository.fillSampleDate(marketdatarepository.marketDataRepositorySingleton)
     inst = instruments.Asset("SPX", currencies.USD)
-    fwd = instruments.Forward("SPX-1", inst, maturity=datetime.datetime(2023,6,12), strike=100., ccy=currencies.USD )
+    fwd = instruments.Forward("SPX-1", inst, maturity=datetime.datetime(2023,6,12), strike=100., currency=currencies.USD )
 
     model = modelutil.fillSampleModel(inst)
 
@@ -42,7 +42,7 @@ def test_european_option_calculator():
     
     marketdatarepository.fillSampleDate(marketdatarepository.marketDataRepositorySingleton)
     inst = instruments.Asset("SPX", currencies.USD)
-    euo = instruments.EuropeanOption("SPX-1", inst, maturity=datetime.datetime(2023,6,12), strike=100., ccy=currencies.USD )
+    euo = instruments.EuropeanOption("SPX-1", inst, maturity=datetime.datetime(2023,6,12), strike=100., currency=currencies.USD )
 
     model = modelutil.fillSampleModel(inst)
 
@@ -55,7 +55,7 @@ def test_european_option_calculator():
 
     assert abs(v - 5.4536241485429073) < constants.EPSILON
 
-    v.backward(create_graph=True)
+    v.backward()
 
 
 if __name__ == '__main__':

@@ -13,12 +13,12 @@ def test_models():
 
     marketdatarepository.fillSampleDate(marketdatarepository.marketDataRepositorySingleton)
     inst = instruments.Asset("SPX", currencies.USD)
-    fwd = instruments.Forward("SPX-1", inst )
+    fwd = instruments.Forward("SPX-1", inst, datetime.datetime.now(), 'NaN', currencies.USD )
 
     model = modelutil.fillSampleModel(inst)
 
     # Get the model components
-    dmc = model.discountfactors[inst.ccy.toString()]
+    dmc = model.discountfactors[inst.getCcy().toString()]
     fmc = model.forwards[inst.name]
     vmc = model.volatilities[inst.name]    
 

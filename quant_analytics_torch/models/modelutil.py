@@ -13,8 +13,8 @@ def fillSampleModel(inst : instruments.Asset):
     marketdatarepository.fillSampleDate(marketdatarepository.marketDataRepositorySingleton)
 
     model = models.Model(datetime.datetime.now())
-    dmc = discountmodels.DiscountModelComponent(model, marketdatarepository.marketDataRepositorySingleton, inst.ccy )
-    model.discountfactors[inst.ccy.toString()] = dmc
+    dmc = discountmodels.DiscountModelComponent(model, marketdatarepository.marketDataRepositorySingleton, inst.getCcy() )
+    model.discountfactors[inst.getCcy().toString()] = dmc
     fmc = forwardmodels.ForwardModelComponent(model, marketdatarepository.marketDataRepositorySingleton, inst)
     model.forwards[inst.name] = fmc
     vmc = volatilitymodels.SSVIVolatilityModelComponent(model, marketdatarepository.marketDataRepositorySingleton, inst)

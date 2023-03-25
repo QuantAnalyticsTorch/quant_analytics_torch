@@ -5,6 +5,7 @@ nbsphinx
 numpy
 pandas
 pandoc
+pytest
 scipy
 scikit-learn
 sphinx

@@ -3,13 +3,13 @@ from dataclasses import dataclass
 
 @dataclass
 class Currency(object):
-    ccy : str
+    currency : str
 
     def toString(self):
-        return self.ccy
+        return self.currency
 
 USD = Currency("USD")
-EUR = Currency("USD")
+EUR = Currency("EUR")
 
 if __name__ == '__main__':
     ccy = Currency("JPY")

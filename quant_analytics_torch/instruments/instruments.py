@@ -2,7 +2,7 @@
 from quant_analytics_torch.instruments import currencies
 
 import datetime
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 
 @dataclass
@@ -16,7 +16,10 @@ class InstrumentBase(object):
     def id(self):
         return None
 
-    def ccy(self):
+    def getCcy(self):
+        return None
+
+    def getMaturity(self):
         return None
 
     def __repr__(self):
@@ -32,26 +35,30 @@ class InstrumentBase(object):
 class CashDeposit(InstrumentBase):
     """ Cash deposit class """
     name : str
-    ccy : currencies
+    currency : currencies.Currency
     maturity : datetime.datetime = datetime.datetime.now()
 
     def id(self):
-        return { self.type() : { self.ccy.toString() : self.maturity } }
+        return { self.type() : { self.currency.toString() : self.maturity } }
 
-    def ccy(self):
-        return self.ccy
+    def getCcy(self):
+        return self.currency
+    
+    def getMaturity(self):
+        return self.maturity
+
 
 @dataclass
 class Asset(InstrumentBase):
     """Asset class """
     name : str
-    ccy : currencies
+    currency : currencies.Currency = field(default_factory=currencies.USD)
 
     def id(self):
-        return { self.type() : { self.name : self.ccy.toString() } }
+        return { self.type() : { self.name : self.currency.toString() } }
 
-    def ccy(self):
-        return self.ccy
+    def getCcy(self):
+        return self.currency
 
     def __get__(self, date : datetime.datetime):
         pass
@@ -63,16 +70,22 @@ class Forward(InstrumentBase):
     inst : InstrumentBase
     maturity : datetime.datetime = datetime.datetime.now()
     strike : float = float('NaN')
-    ccy : currencies = currencies.USD
+    currency : currencies.Currency = field(default_factory=currencies.USD)
 
     def id(self):
         return { self.type() : { self.inst.name : { self.maturity : self.strike } } }
 
-    def ccy(self):
-        return self.ccy
+    def getCcy(self):
+        return self.currency
 
     def payoff(self):
         pass
+
+
+class OptionType(Enum):
+    PUT = auto()
+    CALL = auto()
+    STRADDLE = auto()
 
 
 @dataclass
@@ -82,13 +95,17 @@ class EuropeanOption(InstrumentBase):
     inst : InstrumentBase
     maturity : datetime.datetime
     strike : float
-    ccy : currencies = currencies.USD
+    optiontype : OptionType = OptionType.CALL
+    currency : currencies.Currency = field(default_factory=currencies.Currency)
 
     def id(self):
-        return { self.type() : { self.inst.name : { self.maturity : self.strike } } }
+        return { self.type() : { self.inst.name : { self.maturity : { self.strike : { self.optiontype : self.currency } } } } }
 
-    def ccy(self):
-        return self.ccy
+    def getCcy(self):
+        return self.currency
+
+    def getMaturity(self):
+        return self.maturity
 
 #    def __get__(self, evolutionGenerator : evoluationGeneratorBase, stateTensor):
 #        return None
@@ -111,13 +128,13 @@ class SSVIVolatility(InstrumentBase):
     def id(self):
         return { self.type() : { self.inst.name : { self.maturity : self.paramType } } }
 
-    def ccy(self):
-        return self.ccy
+    def getCcy(self):
+        return self.currency
 
 if __name__ == '__main__':
     inst = Asset("SPX", currencies.USD)
-    fwd = Forward("SPX-2011", inst, datetime.datetime(2021,12,12))
-    option = EuropeanOption("SPX-X-Y", inst, '2021-11-11', 100.)
+    fwd = Forward("SPX-2011", inst, datetime.datetime(2021,12,12), 100, currencies.USD)
+    option = EuropeanOption("SPX-X-Y", inst, '2021-11-11', 100., OptionType.CALL, currencies.USD)
     print(inst.type())
     print(inst.id())    
 

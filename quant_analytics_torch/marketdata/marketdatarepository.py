@@ -59,7 +59,7 @@ def fillSampleDate(marketData : MarketDataRepository):
     dfs = [0.99, 0.98, 0.97]        
 
     for j,jt in enumerate(fwd_dates):
-        fwds.append( instruments.Forward("SPX-" + str(j), inst_1, jt ) )
+        fwds.append( instruments.Forward("SPX-" + str(j), inst_1, jt, 'NaN', currencies.USD ) )
         cashdeposits.append( instruments.CashDeposit("USD-" + str(j), currencies.USD, jt ) )        
 
     for i,f in enumerate(fwds):
@@ -110,7 +110,7 @@ if __name__ == '__main__':
     md = marketDataRepositorySingleton[inst_1.type()]
     print(md)
 
-    fwd_1 = instruments.Forward("SPX-1", inst_1, datetime.datetime(2021,12,12) )
+    fwd_1 = instruments.Forward("SPX-1", inst_1, datetime.datetime(2021,12,12), 'NaN', currencies.USD )
 
     md = marketDataRepositorySingleton[{ fwd_1.type() : inst_1.name }]
 
@@ -119,7 +119,7 @@ if __name__ == '__main__':
     # Get the cash deposit data
     cashdeposit = instruments.CashDeposit(None, currencies.USD, datetime.datetime.now() )
 
-    md = marketDataRepositorySingleton[{ cashdeposit.type() : cashdeposit.ccy.toString() }]
+    md = marketDataRepositorySingleton[{ cashdeposit.type() : cashdeposit.getCcy().toString() }]
 
     print(md)
 
