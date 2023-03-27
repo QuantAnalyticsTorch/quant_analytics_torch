@@ -33,3 +33,9 @@ Example notebooks
         :link-type: doc
 
         Example of equity cash dividend volatility conversion
+
+    .. grid-item-card:: Heston Quadratic Exponential Simulation
+        :link: ./examples/HestonQuadraticExponentialSimulation
+        :link-type: doc
+
+        Pytorch (vectorized) implementation of the Quadratic Exponential scheme      
