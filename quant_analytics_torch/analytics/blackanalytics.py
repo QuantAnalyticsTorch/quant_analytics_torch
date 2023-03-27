@@ -41,7 +41,20 @@ def black_torch_vega_diff(s, k, dt, v, r):
     dx, = torch.autograd.grad(x, [v], create_graph=True, retain_graph=True)
     return dx
 
-def impliedvolatility(p, s, k, dt, feps = 1e-8, veps = 1e-8, max_iter = 10):
+def impliedvolatility(p : float, s : float, k : float, dt : float, feps = 1e-8, veps = 1e-8, max_iter = 10) ->  float:
+    """ Black implied volatility
+
+    .. _target impliedvolatility:
+
+    Args:
+        p (float): price
+        s (float): forward
+        k (float): strike
+        dt (float): time to maturity
+
+    Returns:
+        sigma (float): Black implied volatility
+    """
     v = 0.2
     vp = 0
     pt = black(s, k, dt, v)
