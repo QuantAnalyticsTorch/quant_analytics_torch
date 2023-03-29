@@ -26,7 +26,7 @@ This is the introduction to Quant Analytics Torch. User are recommended to read 
 
 Link to the public github `quant_analytics_torch`_ repo.
 
-.. _quant_analytics_torch link: https://domain.invalid/
+.. _quant_analytics_torch: https://github.com/QuantAnalyticsTorch/quant_analytics_torch
 
 .. grid:: 2
     :margin: 5 5 0 0
