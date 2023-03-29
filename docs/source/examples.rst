@@ -15,6 +15,8 @@ Examples
 
    ./examples/SSVICalibration
    ./examples/EquityCashDividends
+   ./examples/HestonQuadraticExponentialSimulation
+   ./examples/32QuadraticExponentialSimulation
 
 Example notebooks
 
@@ -38,4 +40,10 @@ Example notebooks
         :link: ./examples/HestonQuadraticExponentialSimulation
         :link-type: doc
 
-        Pytorch (vectorized) implementation of the Quadratic Exponential scheme      
+        Pytorch (vectorized) Heston implementation of the Quadratic Exponential scheme      
+
+    .. grid-item-card:: 32 Quadratic Exponential Simulation
+        :link: ./examples/32QuadraticExponentialSimulation
+        :link-type: doc
+
+        Pytorch (vectorized) 3/2 implementation of the Quadratic Exponential scheme

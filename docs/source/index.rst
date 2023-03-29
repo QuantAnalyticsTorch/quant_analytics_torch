@@ -24,6 +24,10 @@ This is the introduction to Quant Analytics Torch. User are recommended to read 
 .. image:: https://mybinder.org/badge_logo.svg
     :target: https://mybinder.org/v2/gh/QuantAnalyticsTorch/quant_analytics_torch.git/main?urlpath=lab%2Ftree%2Fdocs%2Fsource%2Fexamples
 
+Link to the public github `quant_analytics_torch`_ repo.
+
+.. _quant_analytics_torch link: https://domain.invalid/
+
 .. grid:: 2
     :margin: 5 5 0 0
     :gutter: 4
