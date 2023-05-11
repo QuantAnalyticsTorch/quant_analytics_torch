@@ -18,6 +18,9 @@ Quant Analytics Torch
 
 This is the introduction to Quant Analytics Torch. User are recommended to read the :hoverxref:`getting started <getting_started>`.
 
+.. image:: https://img.shields.io/discord/1038839012602941528.svg?color=7289da&&logo=discord
+    :target: https://discord.gg/U2VReK4m
+
 .. image:: https://colab.research.google.com/assets/colab-badge.svg
     :target: https://colab.research.google.com/github/QuantAnalyticsTorch/quant_analytics_torch/blob/main/docs/source/examples/SSVICalibration.ipynb
 
