@@ -18,9 +18,9 @@ Repo is setup for development via Github codespaces
 
 ## Contribution
 
-If you like to discuss this repo, join me on Slack
+If you like to discuss this repo, join me on Discord
 
-https://join.slack.com/t/quantanalyticstorch/shared_invite/zt-1s79f5r74-JNg67lnenyNs1HYOxeF0dg
+https://discord.gg/U2VReK4m
 
 ## Run the tests
 
