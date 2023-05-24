@@ -20,6 +20,19 @@ def heston_option_price(strike,forward,v,kappa,theta,eps,rho,dt):
     y = integrate.quad(f, 0, 20, args=())
     return y[0]*np.exp(-ad*k)/np.pi
 
+def characteristicfunction_blackscholes(u,x,sigma,dt):
+    return np.exp(1j*u*x-0.5*sigma*sigma*u*(u+1j)*dt)
+
+def blackscholes_option_price(strike,forward,sigma,dt):
+    x = np.log(forward)
+    k = np.log(strike)
+    ad = 0.5
+    f = lambda u: characteristicfunction_blackscholes(u-(ad+1)*1j,x,sigma,dt)*np.exp(-1j*u*k)/(-(u-1j*ad)*(u-1j*(ad+1)))
+    y = integrate.quad(f, 0, 20, args=())
+    return y[0]*np.exp(-ad*k)/np.pi
+
+def characteristicfunction_mertonjump(u,lmbd,mu,eta,dt):
+    return np.exp(-lmbd*mu*1j*u*dt + lmbd*dt*((1+mu)**(1j*u)*np.exp(eta*eta*(1j*u/2)*(1j*u-1))-1))
 
 def bivariatecharacteristicfunction_threeovertwo(u,ld,x,v,kappa,theta,eps,rho,dt):
     """

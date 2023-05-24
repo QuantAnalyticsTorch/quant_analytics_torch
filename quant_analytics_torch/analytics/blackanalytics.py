@@ -2,7 +2,7 @@ import torch
 import numpy as np
 from scipy.stats import norm
 
-def black(s, k, dt, v, r=0.0):
+def black(s : float, k : float, dt : float, v : float, r=0.0) -> float:
     std = v * np.sqrt(dt);
     d1 = np.log(s / k) / std + 0.5 * std;
     return s * norm.cdf(d1) - k * norm.cdf(d1 - std);
@@ -18,7 +18,8 @@ def black_gamma(s, k, dt, v, r=0.0):
     return norm.pdf(d1)/s/std;
 
 def black_torch(f : torch.tensor, k : torch.tensor, dt : torch.tensor, v : torch.tensor) -> torch.tensor:
-    """ Black Scholes formula """
+    """ Black Scholes formula 
+    """
     n = torch.distributions.Normal(0, 1).cdf
     sdt = v * torch.sqrt(dt)
     d1 = torch.log(f / k) / sdt + v * v * sdt / 2

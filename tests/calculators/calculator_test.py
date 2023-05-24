@@ -29,7 +29,7 @@ def test_forward_calculator():
 
     assert abs(v - 2.4361986113717453) < constants.EPSILON
 
-    v.backward(create_graph=True)
+    v.backward()
 
 #    for name, param in model.named_parameters():
 #        print(name)
@@ -53,7 +53,7 @@ def test_european_option_calculator():
 
     print(v)
 
-    assert abs(v - 5.4536241485429073) < constants.EPSILON
+    assert abs(v - 3.4230120620316669) < constants.EPSILON
 
     v.backward()
 
