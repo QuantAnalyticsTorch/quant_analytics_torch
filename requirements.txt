@@ -2,6 +2,7 @@ furo
 ipython
 matplotlib
 nbsphinx
+nvmath-python[cu12]
 numpy
 pandas
 pandoc
